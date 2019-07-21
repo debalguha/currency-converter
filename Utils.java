@@ -39,8 +39,8 @@ public class Utils {
                 return Collections.emptyList();
             }
             String[] elements = line.split(",", -1);
-            String fromCurrency = elements[0];
-            return IntStream.range(1, elements.length).mapToObj((index) -> new FXEntry(fromCurrency, headers[index], elements[index])).collect(Collectors.toList());
+            String fromCurrency = elements[0].trim();
+            return IntStream.range(1, elements.length).mapToObj((index) -> new FXEntry(fromCurrency, headers[index].trim(), elements[index].trim())).collect(Collectors.toList());
         };
     }
 
@@ -50,7 +50,7 @@ public class Utils {
                 return Collections.emptyMap();
             }
             String[] elements = line.split(",", -1);
-            return IntStream.range(0, elements.length).<Map.Entry<String, String>>mapToObj((index) -> new HashMap.SimpleEntry<>(headers[index], elements[index]))
+            return IntStream.range(0, elements.length).<Map.Entry<String, String>>mapToObj((index) -> new HashMap.SimpleEntry<>(headers[index].trim(), elements[index].trim()))
                     .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
         };
     }
